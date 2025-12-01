@@ -1,0 +1,19 @@
+system:
+  threshold_ratio: 0.2
+  chunk_size: 1000
+  chunk_overlap: 200
+
+llm:
+  model_name: "gemini-2.5-flash-lite"
+  api_key_env: "GOOGLE_API_KEY"
+
+embedding:
+  model_name: "all-MiniLM-L6-v2"
+  # model_name: "bge-small-en-v1.5"
+  device: "cpu"
+
+retrieval:
+  k: 12
+  
+parsing:
+  api_key_env: "LLAMA_PARSE_API_KEY"
