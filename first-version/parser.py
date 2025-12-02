@@ -57,3 +57,22 @@ def results_into_list_of_strings(results):
             number_of_pages += 1
         list_of_strings[key] = [combined_text], results[key][1]
     return list_of_strings
+
+def parse_multiple_paths_parallel(path_list, max_workers=10):
+    all_results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_path = {executor.submit(parse_single_path, path): path for path in path_list}
+        
+        # As results complete, they are yielded by concurrent.futures.as_completed
+        for future in concurrent.futures.as_completed(future_to_path):
+            path = future_to_path[future]
+            try:
+                # Get the result from the completed future
+                data, estimated_tokens, all_text = future.result()
+                all_results[path] = (data, estimated_tokens, all_text)
+            except Exception as exc:
+                # Handle any exceptions that occurred during parsing
+                print(f'{path} generated an exception: {exc}')
+                all_results[path] = f'Error: {exc}'
+
+    return all_results
