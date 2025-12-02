@@ -27,3 +27,7 @@ python pipeline.py
 ```
 python api.py
 ```
+# First Version features:
+- FAISS + BM25 search
+- Intent Classification
+- Parent Document Retrieval
