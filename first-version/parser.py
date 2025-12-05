@@ -2,6 +2,7 @@ from llama_cloud_services import LlamaParse
 import os
 import concurrent.futures
 import json
+import re
 
 def estimate_tokens_locally(parsed_json_data):
     if isinstance(parsed_json_data, str):
@@ -38,6 +39,10 @@ def parse_single_path(path):
     )
     print(f"Submitting job for: {path}")
     result = parser.parse(file_path=path)
+    estimated_tokens, all_text = estimate_tokens_locally(result)
+    print(f"Finished parsing: {path}")
+    return result, estimated_tokens, all_text
+
 def remove_footer(text):
     '''
     Crawler footers contain downloaded by ...
@@ -58,6 +63,7 @@ def results_into_list_of_strings(results):
         list_of_strings[key] = [combined_text], results[key][1]
     return list_of_strings
 
+# --- Function to parse multiple files in parallel ---
 def parse_multiple_paths_parallel(path_list, max_workers=10):
     all_results = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:

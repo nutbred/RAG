@@ -1,18 +1,35 @@
-llama-parse
+# Document Parsing
+llama-cloud-services==0.6.83
+
+# LangChain Core
 langchain==0.2.16
 langchain-community==0.2.16
 langchain-core==0.2.38
 langchain-text-splitters==0.2.4
 langchain-huggingface==0.0.3
-langchain-google-genai
-faiss-cpu
-sentence-transformers
-rank_bm25
-google-genai
-pyyaml
-joblib
-scikit-learn
-fastapi
-uvicorn
-python-multipart
-httpx
+langchain-google-genai==1.0.10
+
+# Vector Database & Embeddings
+faiss-cpu==1.13.0
+sentence-transformers==5.1.1
+
+# Retrieval & Search
+rank-bm25==0.2.2
+
+# LLM Integration
+google-genai==1.52.0
+
+# Configuration & Utilities
+pyyaml==6.0.2
+python-dotenv==1.0.1
+joblib==1.5.1
+scikit-learn==1.5.2
+
+# API Framework
+fastapi==0.117.1
+uvicorn==0.36.0
+python-multipart==0.0.20
+pydantic==2.11.9
+
+# HTTP Client & Testing
+httpx==0.28.1
